@@ -30,3 +30,54 @@ Constraints:
 The number of nodes in each linked list is in the range [1, 100].
 0 <= Node.val <= 9
 It is guaranteed that the list represents a number that does not have leading zeros.
+
+
+var addTwoNumbers = function(l1, l2) {
+    // Convert lists to arrays
+    let r1 = listToArray(l1);
+    let r2 = listToArray(l2);
+
+    // Now your logic can work with arrays
+    let sum = [];
+    let carry = 0;
+    let i = 0;
+
+    while (i < r1.length || i < r2.length || carry > 0) {
+        let x = r1[i] || 0;
+        let y = r2[i] || 0;
+
+        let s = x + y + carry;
+        sum.push(s % 10);
+        carry = Math.floor(s / 10);
+
+        i++;
+    }
+
+    // Convert result array back to linked list
+    return arrayToList(sum);
+};
+
+
+// Convert linked list → array
+function listToArray(node) {
+    let arr = [];
+    while (node) {
+        arr.push(node.val);
+        node = node.next;
+    }
+    return arr;
+}
+
+// Convert array → linked list
+function arrayToList(arr) {
+    let dummy = new ListNode(0);
+    let curr = dummy;
+
+    for (let n of arr) {
+        curr.next = new ListNode(n);
+        curr = curr.next;
+    }
+
+    return dummy.next;
+}
+
