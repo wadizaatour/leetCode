@@ -46,4 +46,19 @@ var twoSum = function(nums, target) {
     }  
      
     }
+
 };
+var twoSum = function(nums, target) {
+    const seen = {}; // value → index
+
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+
+        if (seen[complement] !== undefined) {
+            return [seen[complement], i];
+        }
+
+        seen[nums[i]] = i;
+    }
+};
+
